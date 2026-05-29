@@ -1,0 +1,15 @@
+description = "Quickly trigger the openQA review workflow for a specific job."
+
+skills = ["openQA Review Assistant"] 
+
+prompt = """
+You have been invoked to execute a review report.
+Raw input: {{args}}
+
+First, parse the Raw input:
+1. Extract the very first word/number as the openQA Job ID.
+2. Treat any remaining text (especially anything after a hyphen) as 'User Context'.
+
+Execute the review workflow strictly adhering to the constraints, forbidden tools, and steps defined in your loaded 'openQA Review Assistant' skill. 
+Pass ONLY the extracted Job ID to your scripts. Keep the 'User Context' in mind during your hypothesis and synthesis steps. Do not deviate from the skill's workflow.
+"""

@@ -1,0 +1,141 @@
+# ==========================================
+# ALLOWED SCRIPTS (Auto-Approve)
+# ==========================================
+
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = "python3 scripts/fetch_job_data.py"
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = "python3 scripts/trace_functions.py"
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = "python3 scripts/analyze_logs.py"
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = "python3 scripts/fetch_historical_packages.py"
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = "python3 scripts/fetch_historical_bugrefs.py"
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = "python3 scripts/compare_commits.py"
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = "python3 scripts/osado_lib.py"
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = "python3 scripts/check_pkg_versions.py"
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = "python3 scripts/analyze_aggregate_incidents.py"
+decision = "allow"
+priority = 100
+
+
+# ==========================================
+# EXPLICIT BLOCK (Deny everything else)
+# Low priority - this only triggers if the 
+# command did not match one of the allowed prefixes.
+# ==========================================
+
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = "" 
+decision = "deny"
+priority = 10
+
+# ALLOW FILE SYSTEM TOOLS FOR SKILL DISCOVERY
+# ==========================================
+
+# 1. Auto-allow reading the SKILL.md file
+[[rule]]
+toolName = "read_file"
+# This regex checks if "SKILL.md" appears anywhere in the tool's JSON arguments
+argsPattern = ".*SKILL\\.md.*" 
+decision = "allow"
+priority = 100
+
+# 2. Auto-allow the agent to list directories (often needed to find the skill)
+[[rule]]
+toolName = "list_directory"
+decision = "allow"
+priority = 100
+
+# 3. Auto-allow it to search file contents (if it gets lost looking for scripts)
+[[rule]]
+toolName = "search_file_content"
+argsPattern = ".*SKILL\\.md.*" 
+decision = "allow"
+priority = 100
+
+# 4. Auto-allow native skill activation prompts 
+[[rule]]
+toolName = "activate_skill"
+decision = "allow"
+priority = 100
+
+# ==========================================
+# EXPLICIT BLOCK (Deny everything else)
+# Low priority - this only triggers if the 
+# command did not match one of the allowed prefixes above.
+# ==========================================
+
+[[rule]]
+toolName = "read_file"
+argsPattern = ".*"
+decision = "deny"
+priority = 10
+
+[[rule]]
+toolName = "read_file"
+decision = "deny"
+priority = 10
+
+[[rule]]
+toolName = "list_directory"
+decision = "deny"
+priority = 10
+
+[[rule]]
+toolName = "search_file_content"
+decision = "deny"
+priority = 10
+
+[[rule]]
+toolName = "grep_search"
+decision = "deny"
+priority = 10
+
+# EXPLICITLY DENY ACCESS TO CREDENTIAL DIRECTORY
+[[rule]]
+name = "Block access to creds folder"
+description = "Ensures the agent cannot read or modify the /credentials/ directory."
+decision = "deny"
+toolName = ".*"  # Applies to all tools (read, write, etc.)
+pathPattern = ".*/credentials/.*"  # Regex pattern for the folder path
+priority = 100

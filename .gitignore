@@ -1,0 +1,5 @@
+credentials/creds.conf
+gemini_env
+__pycache__
+.cache
+temp_data/
