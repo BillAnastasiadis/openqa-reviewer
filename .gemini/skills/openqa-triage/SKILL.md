@@ -168,7 +168,7 @@ Output your final findings using EXACTLY this format. Include the `===` line, th
 
 1.  **Assessment:** [Infrastructure | Test Flake | Update Regression | Product Bug/Regression] (Confidence Level: Low/Medium/High)
 
-2.  **Reasoning:** [Explain your analysis. You MUST explicitly state if the historical incidents involve the exact same packages or completely different packages. Apply the Critical Reasoning Rules. Mention any key findings from the log investigation, code analysis, and package version discrepancy checks.]
+2.  **Reasoning:** [Explain what exactly happened that caused the failure and your analysis. You MUST explicitly state if the historical incidents involve the exact same packages or completely different packages. Apply the Critical Reasoning Rules. Mention any key findings from the log investigation, code analysis, and package version discrepancy checks.]
 
 3.  **Historical Context:** [Summarize the DB findings, e.g., "Occurred 11 times across versions 15-SP5 and 16.0. Linked to 4 different incident IDs."]
 
